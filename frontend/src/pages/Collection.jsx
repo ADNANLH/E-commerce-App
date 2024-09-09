@@ -7,6 +7,8 @@ const Collection = () => {
 
   const {products} = useContext(ShopContext);
   const [showFilter,setShowFilter] = useState(false);
+  const [filterProducts,setFilerProducts] = useState([]);
+
 
   
   return (
@@ -56,6 +58,19 @@ const Collection = () => {
       <div className='flex-1'>
         <div className='flex justify-between text-base sm:text-2xl mb-4'>
           <Title text1={'ALL'} text2={'COLLECTIONS'}/>
+
+          {/* product sort */}
+          <select className='border-[1.4px] border-gray-300 text-sm px-2'>
+            <option value="relavent">Sort by: Relavent</option>
+            <option value="low-high">Sort by: Low to high</option>
+            <option value="high-low">Sort by: High to low</option>
+          </select>
+        </div>
+
+        {/* map products */}
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
+
+
         </div>
 
       </div>
