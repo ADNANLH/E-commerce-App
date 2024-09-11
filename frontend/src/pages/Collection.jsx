@@ -8,9 +8,13 @@ const Collection = () => {
 
   const {products} = useContext(ShopContext);
   const [showFilter,setShowFilter] = useState(false);
-  const [filterProducts,setFilerProducts] = useState([]);
+  const [filterProducts,setFilterProducts] = useState([]);
   const [category,setCategory] = useState([]);
   const [subCategory,setSubCategory] = useState([]);
+  const [sortType,setSortType] = useState('relavent');
+
+
+  // filter part
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -41,14 +45,40 @@ const Collection = () => {
       productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
     }
 
-    setFilerProducts(productsCopy)
+    setFilterProducts(productsCopy)
   }
+
+//  sort part
+
+const sortProduct = () =>{
+  let fpCopy = filterProducts.slice();
+
+  switch (sortType) {
+    case 'low-high':
+      setFilterProducts(fpCopy.sort((a,b)=>(a.price - b.price)));
+      break;
+
+    case 'high-low':
+      setFilterProducts(fpCopy.sort((a,b)=>(b.price - a.price)));
+      break;
+
+    default:
+      applyFilter();
+      break;
+  }
+}
+
 
 
  
  useEffect(() => {
   applyFilter();
  },[category,subCategory])
+
+
+ useEffect(() => {
+  sortProduct();
+ },[sortType])
 
   
   return (
@@ -100,7 +130,7 @@ const Collection = () => {
           <Title text1={'ALL'} text2={'COLLECTIONS'}/>
 
           {/* product sort */}
-          <select className='border-[1.4px] border-gray-300 text-sm px-2'>
+          <select onChange={(e)=>setSortType(e.target.value)} className='border-[1.4px] border-gray-300 text-sm px-2'>
             <option value="relavent">Sort by: Relavent</option>
             <option value="low-high">Sort by: Low to high</option>
             <option value="high-low">Sort by: High to low</option>
