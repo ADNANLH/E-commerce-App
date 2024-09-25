@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export const ShopContext = createContext();
 const ShopContextProvider = (props) =>{
     const currency = '$';
-    const delivety_fee = 10;
+    const delivery_fee = 10;
     const [search,setSearch] = useState('');
     const [showSearch,setShowSearch] = useState(false);
     const [cartItems,setCartItems] = useState({});
@@ -81,7 +81,7 @@ const ShopContextProvider = (props) =>{
    
 
     const value = {
-        products,currency,delivety_fee,
+        products,currency,delivery_fee,
         search,setSearch,showSearch,setShowSearch,
         cartItems,addToCart,
         getCartCount,updateQuantity,
